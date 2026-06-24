@@ -1,0 +1,15 @@
+services:
+  mpv-parser-ui:
+    build: .
+    container_name: mpv-parser-ui
+    ports:
+      - "0.0.0.0:8081:3000" # 將宿主機的 8081 映射到容器內的 3000
+    env_file:
+      - .env               # 關鍵：這會讀取你的 .env 文件並傳入 API Key
+    networks:
+      - npm_network
+    restart: always
+
+networks:
+  npm_network:
+    external: true

@@ -1,0 +1,11 @@
+{
+  "name": "Video Link Player",
+  "description": "A powerful video stream and playlist manager with external protocol launch integrations, orientation support, and precise mobile gesture controls.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

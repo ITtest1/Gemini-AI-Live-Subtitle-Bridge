@@ -1,0 +1,13 @@
+{
+    "APP_WS_URL": "ws://localhost:8081/api/gemini/live",
+    "TARGET_LANGUAGE": "English",
+    "WINDOW_WIDTH": 1200,
+    "WINDOW_HEIGHT": 120,
+    "INIT_FONT_SIZE": 26,
+    "BOTTOM_OFFSET": 220,
+    "DISPLAY_MODE": "translation_only",
+    "AUTO_CLEAR_MS": 4000,
+    "GEMINI_API_KEY": "",
+    "FORCE_CLIENT_KEY": false,
+    "MENU_LANGUAGE": "English"
+}
