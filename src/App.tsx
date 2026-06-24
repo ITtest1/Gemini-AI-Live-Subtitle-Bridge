@@ -263,7 +263,7 @@ export default function App() {
           geminiSubtitleSize: 24,
           geminiApiKeys: [],
           restrictToCustomApiKeys: false,
-          uiLanguage: 'zh-TW',
+          uiLanguage: 'en',
           ...parsed
         };
       }
@@ -282,7 +282,7 @@ export default function App() {
       geminiSubtitleSize: 24,
       geminiApiKeys: [],
       restrictToCustomApiKeys: false,
-      uiLanguage: 'zh-TW',
+      uiLanguage: 'en',
     };
   });
 
@@ -1259,7 +1259,7 @@ export default function App() {
     localStorage.setItem('vlp-settings', JSON.stringify(settings));
   }, [settings]);
 
-  const uiLang = settings.uiLanguage || 'zh-TW';
+  const uiLang = settings.uiLanguage || 'en';
   const t = (zh: string, en: string) => {
     return uiLang === 'en' ? en : zh;
   };
@@ -1657,7 +1657,7 @@ export default function App() {
       {
         id: 'pot',
         name: 'PotPlayer (Windows)',
-        description: '極佳效能 Windows 播放器 (支援 Referrer 與精緻字幕參數)',
+        description: t('極佳效能 Windows 播放器 (支援 Referrer 與精緻字幕參數)', 'High-performance Windows player (supports Referrer and precise subtitle params)'),
         protocol: potplayerLink,
         platform: 'desktop',
         bgColor: 'hover:bg-amber-500/5 group',
@@ -1670,8 +1670,8 @@ export default function App() {
       },
       {
         id: 'vlc-default',
-        name: 'VLC Player (預設協定)',
-        description: '通用最簡原生連結，相容於 Windows, macOS 及 Linux',
+        name: t('VLC Player (預設協定)', 'VLC Player (Default Protocol)'),
+        description: t('通用最簡原生連結，相容於 Windows, macOS 及 Linux', 'Universal minimalist native link, compatible with Windows, macOS, and Linux'),
         protocol: vlcDefaultLink,
         platform: 'desktop',
         bgColor: 'hover:bg-orange-500/5 group',
@@ -1684,8 +1684,8 @@ export default function App() {
       },
       {
         id: 'vlc-ios',
-        name: 'VLC Player (iOS 專用)',
-        description: 'Apple iOS 與 iPadOS 專用，支援載入外部字幕',
+        name: t('VLC Player (iOS 專用)', 'VLC Player (iOS Only)'),
+        description: t('Apple iOS 與 iPadOS 專用，支援載入外部字幕', 'Special for Apple iOS and iPadOS, supports loading external subtitles'),
         protocol: vlcIosLink,
         platform: 'mobile',
         bgColor: 'hover:bg-orange-600/5 group',
@@ -1698,8 +1698,8 @@ export default function App() {
       },
       {
         id: 'vlc-android',
-        name: 'VLC Player (Android 專用)',
-        description: '安卓專用 Intent 啟用，支援字幕及標題傳入',
+        name: t('VLC Player (Android 專用)', 'VLC Player (Android Only)'),
+        description: t('安卓專用 Intent 啟用，支援字幕及標題傳入', 'Android-exclusive Intent activation, supports passing subtitles and titles'),
         protocol: vlcAndroidLink,
         platform: 'mobile',
         bgColor: 'hover:bg-orange-700/5 group',
@@ -1713,7 +1713,7 @@ export default function App() {
       {
         id: 'iina',
         name: 'IINA (macOS)',
-        description: 'Mac 原生設計，極簡直覺的精美播放器',
+        description: t('Mac 原生設計，極簡直覺的精美播放器', 'Native design for macOS, minimalist and intuitive player'),
         protocol: iinaLink,
         platform: 'desktop',
         bgColor: 'hover:bg-teal-500/5 group',
@@ -1727,7 +1727,7 @@ export default function App() {
       {
         id: 'infuse',
         name: 'Infuse Player (Apple)',
-        description: 'iOS、iPadOS、macOS 優質動態串流播放器 (含字幕帶入機制)',
+        description: t('iOS、iPadOS、macOS 優質動態串流播放器 (含字幕帶入機制)', 'iOS, iPadOS, macOS premium media player (with subtitle loading mechanism)'),
         protocol: infuseLink,
         platform: 'mobile',
         bgColor: 'hover:bg-rose-500/5 group',
@@ -1740,8 +1740,8 @@ export default function App() {
       },
       {
         id: 'nplayer',
-        name: 'nPlayer (行動端)',
-        description: '支援 WebDAV/FTP / 點擊即播 (iOS/Android)',
+        name: t('nPlayer (行動端)', 'nPlayer (Mobile)'),
+        description: t('支援 WebDAV/FTP / 點擊即播 (iOS/Android)', 'Supports WebDAV/FTP / play on click (iOS/Android)'),
         protocol: nplayerLink,
         platform: 'mobile',
         bgColor: 'hover:bg-blue-500/5 group',
@@ -1755,7 +1755,7 @@ export default function App() {
       {
         id: 'mxplayer',
         name: 'MX Player (Android)',
-        description: 'Android 最受歡迎的多核心硬體加速解碼播放器',
+        description: t('Android 最受歡迎的多核心硬體加速解碼播放器', 'Most popular multi-core hardware-accelerated decoder player on Android'),
         protocol: mxplayerLink,
         platform: 'mobile',
         bgColor: 'hover:bg-violet-500/5 group',
@@ -1768,8 +1768,8 @@ export default function App() {
       },
       {
         id: 'kmplayer',
-        name: 'KMPlayer (跨平台)',
-        description: '強大的高清影音播放器，支援多端手勢',
+        name: t('KMPlayer (跨平台)', 'KMPlayer (Cross-platform)'),
+        description: t('強大的高清影音播放器，支援多端手勢', 'Powerful high-definition player supporting multi-terminal gestures'),
         protocol: kmplayerLink,
         platform: 'mobile',
         bgColor: 'hover:bg-emerald-500/5 group',
@@ -1782,8 +1782,8 @@ export default function App() {
       },
       {
         id: 'oplayer',
-        name: 'OPlayer (行動端)',
-        description: '格式相容極高，解碼與解鎖音軌格式助手',
+        name: t('OPlayer (行動端)', 'OPlayer (Mobile)'),
+        description: t('格式相容極高，解碼與解鎖音軌格式助手', 'Extremely high format compatibility, help decode and unlock audio track formats'),
         protocol: oplayerLink,
         platform: 'mobile',
         bgColor: 'hover:bg-indigo-500/5 group',
@@ -1796,8 +1796,8 @@ export default function App() {
       },
       {
         id: 'mpv-custom',
-        name: 'MPV Player (帶自訂參數)',
-        description: '支援多字幕與 Referrer、標題參數的高效率桌面播放器',
+        name: t('MPV Player (帶自訂參數)', 'MPV Player (with Custom Parameters)'),
+        description: t('支援多字幕與 Referrer、標題參數的高效率桌面播放器', 'High-performance desktop player supporting multiple subtitles, Referrer, and title parameters'),
         protocol: mpvCustomLink,
         platform: 'desktop',
         bgColor: 'hover:bg-fuchsia-500/5 group',
@@ -1810,8 +1810,8 @@ export default function App() {
       },
       {
         id: 'mpv-default',
-        name: 'MPV Player (預設協定)',
-        description: '純淨、最簡原生協定連結 (mpv://網址)，支援桌面端',
+        name: t('MPV Player (預設協定)', 'MPV Player (Default Protocol)'),
+        description: t('純淨、最簡原生協定連結 (mpv://網址)，支援桌面端', 'Pure, minimalist native protocol link (mpv://url), supports desktop platforms'),
         protocol: mpvDefaultLink,
         platform: 'desktop',
         bgColor: 'hover:bg-purple-500/5 group',
@@ -1824,8 +1824,8 @@ export default function App() {
       },
       {
         id: 'mpv-android',
-        name: 'MPV Player (Android 專用)',
-        description: '安卓專門硬體解碼播放器，支援字幕檔案與標題帶入',
+        name: t('MPV Player (Android 專用)', 'MPV Player (Android Only)'),
+        description: t('安卓專門硬體解碼播放器，支援字幕檔案與標題帶入', 'Dedicated Android hardware decoding player, supports subtitles and title transmission'),
         protocol: mpvAndroidLink,
         platform: 'mobile',
         bgColor: 'hover:bg-pink-500/5 group',
@@ -1838,8 +1838,8 @@ export default function App() {
       },
       {
         id: 'kodi-default',
-        name: 'Kodi Media Center (預設協定)',
-        description: '跨平台家庭劇院中心最簡協定連結 (kodi://網址)',
+        name: t('Kodi Media Center (預設協定)', 'Kodi Media Center (Default Protocol)'),
+        description: t('跨平台家庭劇院中心最簡協定連結 (kodi://網址)', 'Cross-platform home theater center minimalist protocol link (kodi://url)'),
         protocol: kodiDefaultLink,
         platform: 'desktop',
         bgColor: 'hover:bg-sky-500/5 group',
@@ -1852,8 +1852,8 @@ export default function App() {
       },
       {
         id: 'kodi-android',
-        name: 'Kodi Media Center (Android 專用)',
-        description: '安卓專屬 Intent 啟用機制的 Kodi 家庭劇院播放器',
+        name: t('Kodi Media Center (Android 專用)', 'Kodi Media Center (Android Only)'),
+        description: t('安卓專屬 Intent 啟用機制的 Kodi 家庭劇院播放器', 'Android-exclusive Intent activation mechanism for Kodi home theater player'),
         protocol: kodiAndroidLink,
         platform: 'mobile',
         bgColor: 'hover:bg-cyan-600/5 group',
@@ -1866,8 +1866,8 @@ export default function App() {
       },
       {
         id: 'android-universal',
-        name: 'Android 通用選擇器',
-        description: '調用安卓系統「開啟為...」選單，並支援標題傳遞',
+        name: t('Android 通用選擇器', 'Android Universal Chooser'),
+        description: t('調用安卓系統「開啟為...」選單，並支援標題傳遞', 'Invokes Android system "Open with..." menu and supports passing video titles'),
         protocol: androidUniversalLink,
         platform: 'mobile',
         bgColor: 'hover:bg-cyan-500/5 group',
@@ -1880,8 +1880,8 @@ export default function App() {
       },
       {
         id: 'download-direct',
-        name: 'download',
-        description: '直接下載或開啟該目標影片、音訊資源 (僅使用原始連結 {url})',
+        name: t('直接下載資源', 'Direct Download / Open Raw Link'),
+        description: t('直接下載或開啟該目標影片、音訊資源 (僅使用原始連結)', 'Direct download or open target video/audio resource (uses raw link only)'),
         protocol: item.videoUrl,
         platform: 'both',
         download: true,
