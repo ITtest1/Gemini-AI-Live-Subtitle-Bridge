@@ -102,8 +102,9 @@ Use the `?play=` parameter in the browser URL to load a playlist directly.
 ---
 
 ## 💰 Support & Donation / 支持開發者
-
+*If you find this project helpful, you are welcome to support the author through the following ways.
 若此工具對您有所幫助，歡迎透過 USDT-TRC20 支持專案的持續維護：
 * **USDT-TRC20 Address:** `THtQ6hhdJnfR7sNDnsuP7FdEzKN8TVRcNH`
-
+        *   💡 *提示 / Tip*: 如果可以的話，寄給我 USDT 時也順便寄給我一些 TRX。
+        *   💡 *Tip*: If possible, please also send some TRX when sending USDT.
 *(Note: Ensure you are using the correct network when transferring / 轉帳前請務必確認地址與網路)*
