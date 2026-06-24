@@ -4,6 +4,23 @@ A specialized multimedia tool for real-time AI subtitle translation and protocol
 
 ---
 
+## 🚀 Free Deployment on Hugging Face / 免費部署指南
+
+You can easily host this project for free on Hugging Face Spaces. / 您可以輕鬆在 Hugging Face Spaces 免費部署本專案。
+
+### Steps / 步驟:
+1. **Duplicate Space:** Go to the [Demo Link](https://huggingface.co/spaces/hl001x/Gemini-AI-Live-Subtitle-Bridge) and click the **"..."** (Options) button -> **"Duplicate this Space"**. / 前往 [Demo 頁面](https://huggingface.co/spaces/hl001x/Gemini-AI-Live-Subtitle-Bridge)，點擊右上角 **"..."** -> **"Duplicate this Space"**。
+2. **Setup Secrets:** After duplicating, go to **Settings** -> **Variables and secrets** and add your `GEMINI_API_KEY`. / 複製完成後，前往 **Settings** -> **Variables and secrets** 新增您的 `GEMINI_API_KEY`。
+3. **Note on Sleeping:** Hugging Face Spaces will automatically put your Space to "sleep" after 48 hours of inactivity. Just manually click "Restart this Space" in the Settings tab to wake it up. / **注意**：Hugging Face 免費空間若 48 小時無人使用會進入休眠。只需在 Settings 點擊 "Restart this Space" 即可喚醒。
+
+### Direct Access Address / 直接訪問地址
+To get the independent URL for your client, convert your space URL: / 若要取得客戶端連線用的獨立網址，請依照以下格式轉換：
+- **Space URL:** `https://huggingface.co/spaces/USERNAME/SPACE_NAME`
+- **Direct URL:** `https://USERNAME-SPACE_NAME.hf.space`
+*Enter this URL into your client's "Advanced Preferences" to connect. / 將此 URL 填入您客戶端的 "Advanced Preferences" 即可連線。*
+
+---
+
 ## 🚀 Key Features / 核心功能
 
 ### 1. Real-time AI Captioning (Gemini Live Audio Bridge) / AI 即時字幕與翻譯
@@ -21,35 +38,18 @@ A specialized multimedia tool for real-time AI subtitle translation and protocol
 
 ---
 
-## 📋 System Pre-requisites / 系統準備需求
+## 🌐 Live Demo / 在線體驗
+You can experience the web-based demo via Hugging Face Spaces (please configure your own API key). / 您可以透過 Hugging Face Spaces 體驗網頁版 Demo (需自行填入 API Key):
+[Gemini-AI-Live-Subtitle-Bridge Live Demo](https://hl001x-gemini-ai-live-subtitle-bridge.hf.space)
 
-Before running the Python script or using the packaged executable, ensure your system meets these requirements / 在啟動 Python 腳本或執行打包版程式前，請確保系統滿足以下需求：
+---
 
-### 1. For Packaged Executables / 針對打包版執行檔
-*   **Windows:**
-    - Enable **Stereo Mix** / 啟用「**立體聲混音**」: `Control Panel (控制台) -> Sound (聲音) -> Recording (錄製) -> Right-click to Enable Stereo Mix`.
-    - Alternatively, install a virtual audio driver like [VB-CABLE](https://vb-audio.com/Cable/) for reliable system-wide loopback capture. / 或安裝虛擬音訊驅動程式（如 VB-CABLE）以獲得最穩定的系統音訊擷取。
-*   **Linux (Ubuntu/Debian):**
-    - Install necessary system-level audio and UI dependencies / 安裝系統層級音訊與 UI 依賴套件:
-      ```bash
-      sudo apt-get update && sudo apt-get install -y libportaudio2 libxcb-xinerama0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-shape0 libxkbcommon-x11-0
-      ```
-    - Ensure `parec` and `pactl` (PulseAudio/PipeWire-pulse tools) are installed. / 確保系統已安裝 `parec` 與 `pactl` 工具。
-    - Give execution permissions to the binary / 賦予執行檔運行權限: `chmod +x gemini_subtitle_linux`
-*   **macOS:**
-    - macOS does not natively support system loopback audio. You **must** install a virtual driver / macOS 不支援原生系統音訊擷取，您**必須**安裝虛擬驅動程式:
-      ```bash
-      brew install blackhole-2ch
-      ```
-    - Configure BlackHole as your system output in "System Settings -> Sound -> Output". / 在「系統設定 -> 聲音 -> 輸出」中選擇 BlackHole。
+## 🔑 Gemini API Key Configuration / API Key 設定方式
+This project provides three flexible API key configuration methods, ordered by priority (higher priority overrides lower priority). / 本專案提供三種靈活的 API Key 設定方式，優先級由高到低（若高優先級設定則忽略低優先級）：
 
-### 2. For Running the Raw Python Script (`gemini_audio_bridge.py`) / 針對執行原始 Python 腳本
-*   Python 3.8 or above installed on your machine. / 電腦需安裝 Python 3.8 或以上版本。
-*   Install python requirements / 安裝 Python 套件依賴:
-    ```bash
-    pip install websockets numpy sounddevice PyQt6
-    ```
-*   Follow the audio device setup instructions above depending on your OS. / 根據您的作業系統，遵循上方對應的音訊裝置設定。
+1. **Client UI Menu (Highest Priority / 最高優先級):** Configure in "Advanced Preferences" within the Python script or packaged app right-click menu, and check "Force use client API key" to force override `.env` or web settings. / 在 Python 腳本或打包版程式右鍵選單的 "Advanced Preferences" 中填寫，並勾選 "Force use client API key"，即可強制覆蓋 `.env` 或網頁端設定。
+2. **Web UI Settings (Web 端設定):** Configure in the web interface settings page, suitable when you prefer not to use `.env` keys. / 在網頁端設定頁面填寫，適用於不想使用 `.env` 金鑰時。
+3. **Environment Variable (`.env` / 環境變數):** Configure in the server-side `.env` file; supports multiple keys separated by commas (`,`) for rotation. / 在伺服器端 `.env` 檔案填寫，支援多個 API Key (以逗號 `,` 分隔)，系統會自動輪詢。
 
 ---
 
@@ -66,6 +66,34 @@ For detailed installation, configuration, and troubleshooting, please refer to t
 - **Before setup:** To ensure all system dependencies are met. / **安裝前：** 確保滿足所有系統相依性。
 - **Troubleshooting:** If you encounter runtime errors or configuration issues. / **排錯時：** 若遇到執行錯誤或設定問題。
 - **Advanced Usage:** For customizing settings beyond the basics. / **進階用法：** 若需進行超出基礎設定的客製化。
+
+---
+
+## 📦 Packaged App Guide / 打包版使用說明
+
+如果您不想手動配置 Python 環境，**強烈建議 Windows 使用者使用打包好的執行檔 (.exe)**，它已經內建了所有依賴，直接執行即可。 / If you prefer not to configure the Python environment manually, **it is highly recommended for Windows users to use the packaged executable (.exe)**, as it includes all necessary dependencies.
+
+### 1. Windows Installation (Raw Script) / Windows 手動安裝 (原始腳本)
+If you prefer running the script, use the `install.bat` to setup a virtual environment: / 若您偏好執行原始腳本，請使用 `install.bat` 來設定虛擬環境：
+- **Usage:** Navigate to the `/client` folder and **double-click `install.bat`**. It will create a `venv` folder and install all dependencies there. / **使用說明**：進入 `/client` 資料夾並**雙擊 `install.bat`**。它會自動建立一個 `venv` 資料夾並在其中安裝所有依賴。
+
+### 2. Troubleshooting / 遇到問題
+若打包版程式運行異常，請依照以下步驟排查：
+- **Run Raw Script for Debugging:** If the packaged version fails, please use the original Python script (`gemini_audio_bridge.py`) and run it via terminal/command prompt (`python gemini_audio_bridge.py`). This will output logs directly to the console, helping you identify the exact cause of the failure. / 若打包版程式無法運作，請改用原始 Python 腳本直接在終端機執行，您將能看到完整的錯誤日誌，有助於找出問題根源。
+
+---
+
+## 📂 Client-Side Scripts / 客戶端腳本
+
+These scripts are located in the `/client` directory and facilitate interaction with the bridge and media players. / 這些腳本位於 `/client` 目錄下，用於協助與橋接器及播放器進行互動。
+
+| Script / 腳本 | Platform / 平台 | Purpose / 用途 | Usage / 使用說明 |
+| :--- | :--- | :--- | :--- |
+| **`gemini_audio_bridge.py`** | Universal / 通用 | Core AI Bridge. / 核心 AI 橋接器。 | Run via venv / 透過虛擬環境執行 |
+| **`gemini_toggle_win.lua`** | Windows MPV | MPV plugin for Windows. / Windows 版 MPV 插件。 | Place in `%APPDATA%\mpv\scripts\` |
+| **`gemini_toggle.lua`** | Linux MPV | MPV plugin for Linux. / Linux 版 MPV 插件。 | Place in `~/.config/mpv/scripts/` |
+| **`run_bridge.sh`** | Linux/macOS | Convenience script. / 方便啟動橋接器的腳本。 | `chmod +x run_bridge.sh && ./run_bridge.sh` |
+| **`install.bat`** | Windows | Install dependencies in `venv`. / 在 `venv` 中安裝依賴。 | Double-click to run / 雙擊執行 |
 
 ---
 
@@ -87,20 +115,6 @@ Use the `?play=` parameter in the browser URL to load a playlist directly.
     `your-app-url/?play=mpv://url1 --title="Title1"|@@mpv://url2 --title="Title2"`
 
 ---
-
-## 📦 Packaged App Guide / 打包版使用說明
-
-如果您使用的是已打包的執行檔 (Packaged Executable)：
-
-### 1. Configuration (No Recompilation Needed) / 設定與參數調整
-- **`config.json`:** 應用程式啟動後會產生此檔案。您可以直接用文字編輯器開啟它，修改 `GEMINI_API_KEY`、`TARGET_LANGUAGE`、字體大小等參數。修改後重新啟動程式即可生效。
-
-### 2. Troubleshooting / 遇到問題
-若打包版程式運行異常，請依照以下步驟排查：
-- **Run Raw Script for Debugging:** If the packaged version fails, please use the original Python script (`gemini_audio_bridge.py`) and run it via terminal/command prompt (`python gemini_audio_bridge.py`). This will output logs directly to the console, helping you identify the exact cause of the failure. / 若打包版程式無法運作，請改用原始 Python 腳本直接在終端機執行，您將能看到完整的錯誤日誌，有助於找出問題根源。
-
----
-
 ## 💰 Support & Donation / 支持開發者
 *If you find this project helpful, you are welcome to support the author through the following ways.
 若此工具對您有所幫助，歡迎透過 USDT-TRC20 支持專案的持續維護：

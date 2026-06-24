@@ -2613,7 +2613,7 @@ export default function App() {
               {/* QR Code Graphic Frame */}
               <div className="bg-white p-3.5 rounded-2xl shadow-xl border border-zinc-700/30 relative group transition-transform duration-300 hover:scale-[1.02]">
                 <img 
-                  src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=TXH6pP94E5Z6Hic7rbyi8P9N9K1YsmAn2t" 
+                  src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=THtQ6hhdJnfR7sNDnsuP7FdEzKN8TVRcNH" 
                   alt="USDT TRC20 QR Code"
                   className="h-[180px] w-[180px] select-none bg-zinc-50"
                   referrerPolicy="no-referrer"
@@ -2628,11 +2628,11 @@ export default function App() {
                 </div>
                 <div className="flex items-center gap-2 bg-zinc-950 border border-zinc-800 rounded-xl p-3">
                   <span className="font-mono text-[11px] text-emerald-400 flex-1 break-all tracking-wider text-center select-all">
-                    TXH6pP94E5Z6Hic7rbyi8P9N9K1YsmAn2t
+                    THtQ6hhdJnfR7sNDnsuP7FdEzKN8TVRcNH
                   </span>
                   <button
                     onClick={() => {
-                      navigator.clipboard.writeText("TXH6pP94E5Z6Hic7rbyi8P9N9K1YsmAn2t");
+                      navigator.clipboard.writeText("THtQ6hhdJnfR7sNDnsuP7FdEzKN8TVRcNH");
                       setAddressCopied(true);
                       setTimeout(() => setAddressCopied(false), 2000);
                     }}
