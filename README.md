@@ -55,12 +55,12 @@ Before running the Python script or using the packaged executable, ensure your s
 
 ## 🛠️ Usage Guide / 使用說明
 
-For detailed installation, configuration, and troubleshooting, please refer to the specific user guides provided in the `dist` folder:
+For detailed installation, configuration, and troubleshooting, please refer to the specific user guides provided in the `docs` folder:
 
-若需詳細的安裝、設定與排錯資訊，請參閱 `dist` 資料夾中的使用指南：
+若需詳細的安裝、設定與排錯資訊，請參閱 `docs` 資料夾中的使用指南：
 
-- **`dist/user_guide_en.md`**: Comprehensive English user guide. / 詳盡的英文使用指南。
-- **`dist/user_guide_zh.md`**: 詳盡的中文使用指南。
+- **`docs/user_guide_en.md`**: Comprehensive English user guide. / 詳盡的英文使用指南。
+- **`docs/user_guide_zh.md`**: 詳盡的中文使用指南。
 
 **When to read these? / 何時閱讀？**
 - **Before setup:** To ensure all system dependencies are met. / **安裝前：** 確保滿足所有系統相依性。
