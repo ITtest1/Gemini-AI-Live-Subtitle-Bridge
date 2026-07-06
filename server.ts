@@ -11,7 +11,7 @@ async function startServer() {
   const PORT = 3000;
 
   // Create HTTP server to share between Express and WebSocket Server
-  const server = http.createServer(app);
+  const server = http.createServer({ maxHeaderSize: 1024 * 64 }, app);
 
   // Initialize WebSocket server on the same HTTP server
   const wss = new WebSocketServer({ server, path: "/api/gemini/live" });
