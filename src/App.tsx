@@ -263,7 +263,7 @@ export default function App() {
           geminiSubtitleSize: 24,
           geminiApiKeys: [],
           restrictToCustomApiKeys: false,
-          uiLanguage: 'en',
+          uiLanguage: 'zh-TW',
           ...parsed
         };
       }
@@ -282,7 +282,7 @@ export default function App() {
       geminiSubtitleSize: 24,
       geminiApiKeys: [],
       restrictToCustomApiKeys: false,
-      uiLanguage: 'en',
+      uiLanguage: 'zh-TW',
     };
   });
 
@@ -1259,7 +1259,7 @@ export default function App() {
     localStorage.setItem('vlp-settings', JSON.stringify(settings));
   }, [settings]);
 
-  const uiLang = settings.uiLanguage || 'en';
+  const uiLang = settings.uiLanguage || 'zh-TW';
   const t = (zh: string, en: string) => {
     return uiLang === 'en' ? en : zh;
   };
@@ -3403,6 +3403,11 @@ function ArtPlayerComponent({
   geminiTranslatedSubtitle?: string;
   isGeminiListening?: boolean;
 }) {
+  const uiLang = settings.uiLanguage || 'zh-TW';
+  const t = (zh: string, en: string) => {
+    return uiLang === 'en' ? en : zh;
+  };
+
   const artRef = useRef<HTMLDivElement>(null);
   const hudRightRef = useRef<HTMLDivElement | null>(null);
   const hudCenterRef = useRef<HTMLDivElement | null>(null);
@@ -3611,24 +3616,36 @@ function ArtPlayerComponent({
       playbackRateList: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.5, 3, 3.5, 4],
       settings: [
         {
-          html: '字幕選擇',
+          html: t('字幕選擇', 'Subtitle Selection'),
           width: 250,
-          tooltip: subs.length > 0 ? `自訂字幕已載入 (${subs.length}個)` : '無字幕',
-          selector: subs.length > 0 ? subs.map((s, idx) => ({
-            default: idx === 0,
-            html: `字幕軌 ${idx + 1}`,
-            url: s,
-          })) : [
+          tooltip: subs.length > 0 ? t(`自訂字幕已載入 (${subs.length}個)`, `Custom subtitles loaded (${subs.length})`) : t('無字幕', 'No Subtitles'),
+          selector: subs.length > 0 ? [
+            ...subs.map((s, idx) => ({
+              default: idx === 0,
+              html: t(`字幕軌 ${idx + 1}`, `Subtitle Track ${idx + 1}`),
+              url: s,
+            })),
+            {
+              default: false,
+              html: t('關閉字幕', 'Turn Off Subtitles'),
+              url: '',
+            }
+          ] : [
             {
               default: true,
-              html: '無字幕',
+              html: t('無字幕', 'No Subtitles'),
               url: '',
             }
           ],
           onSelect: function(item: any) {
-            art.subtitle.switch(item.url, {
-              name: item.html,
-            });
+            if (item.url === '') {
+              art.subtitle.show = false;
+            } else {
+              art.subtitle.show = true;
+              art.subtitle.switch(item.url, {
+                name: item.html,
+              });
+            }
             return item.html;
           },
         },
