@@ -1549,11 +1549,17 @@ export default function App() {
       url = pruneEmptyPlaceholder(url, 'encodedTitle');
     }
 
+    const scheme = item.videoUrl.split(':')[0] || 'https';
+    const videoUrlNoProtocol = item.videoUrl.replace(/^https?:\/\//i, '');
+    const urlNoColon = item.videoUrl.replace("://", "//");
+
+    url = url.replace(/\{urlNoProtocol\}/g, videoUrlNoProtocol);
+    url = url.replace(/\{encodedUrlNoProtocol\}/g, encodeURIComponent(videoUrlNoProtocol));
+    url = url.replace(/\{scheme\}/g, scheme);
+
     url = url.replace(/\{url\}/g, item.videoUrl);
     url = url.replace(/\{encodedUrl\}/g, encodeURIComponent(item.videoUrl));
     
-    // Add special placeholder formats removing colons from protocols (like converting 'https://' to 'https//')
-    const urlNoColon = item.videoUrl.replace("://", "//");
     url = url.replace(/\{urlNoColon\}/g, urlNoColon);
     url = url.replace(/\{encodedUrlNoColon\}/g, encodeURIComponent(urlNoColon));
     
@@ -1578,6 +1584,24 @@ export default function App() {
 
     // Clean up multiple contiguous spaces
     url = url.replace(/\s+/g, ' ').trim();
+
+    // SMART INTENT URI AUTO-CORRECTION:
+    // Handle Android Intent URIs intelligently to prevent browser double http:// or http://https:// errors
+    if (/^intent:/i.test(url)) {
+      // 1. Normalize 'intent:' to 'intent://' if // is missing
+      if (!url.startsWith('intent://')) {
+        url = url.replace(/^intent:/i, 'intent://');
+      }
+
+      // 2. Strip out duplicate or extra http:// or https:// immediately following intent://
+      // e.g., intent://https://domain.com/video.mp4 -> intent://domain.com/video.mp4
+      url = url.replace(/^intent:\/\/(?:https?:\/\/)+/i, 'intent://');
+
+      // 3. Inject scheme parameter in Intent metadata if #Intent; is present but scheme= is omitted
+      if (url.includes('#Intent;') && !url.includes('scheme=')) {
+        url = url.replace('#Intent;', `#Intent;scheme=${scheme};`);
+      }
+    }
 
     return url;
   };
@@ -3019,10 +3043,12 @@ export default function App() {
                     <div className="bg-zinc-950/40 p-2.5 rounded-lg border border-zinc-900/60 text-[9px] text-zinc-500 space-y-1">
                       <p className="font-bold text-zinc-400">{t("可用替換參數旗擺代碼：", "Available placeholder tokens:")}</p>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-x-2 gap-y-1 font-mono">
-                        <div><strong className="text-zinc-300">{"{url}"}</strong>: {t("原始 URL (帶冒號)", "Raw URL")}</div>
-                        <div><strong className="text-indigo-400">{"{encodedUrl}"}</strong>: {t("轉碼 URL (帶冒號)", "Encoded URL")}</div>
-                        <div><strong className="text-emerald-400">{"{urlNoColon}"}</strong>: {t("無冒號 URL (雙斜線)", "Raw URL (No Protocol Scheme)")}</div>
-                        <div><strong className="text-teal-400">{"{encodedUrlNoColon}"}</strong>: {t("轉碼無冒號 URL", "Encoded URL (No Protocol Scheme)")}</div>
+                        <div><strong className="text-purple-400">{"{urlNoProtocol}"}</strong>: {t("無 http(s):// 前綴 (Intent 推薦)", "URL without http(s):// (Best for Intent)")}</div>
+                        <div><strong className="text-amber-400">{"{scheme}"}</strong>: {t("協定標頭 (http/https)", "Scheme (http or https)")}</div>
+                        <div><strong className="text-zinc-300">{"{url}"}</strong>: {t("原始 URL (帶 http/https)", "Raw URL")}</div>
+                        <div><strong className="text-indigo-400">{"{encodedUrl}"}</strong>: {t("轉碼 URL", "Encoded URL")}</div>
+                        <div><strong className="text-emerald-400">{"{urlNoColon}"}</strong>: {t("無冒號 URL (https//)", "URL with no colon")}</div>
+                        <div><strong className="text-teal-400">{"{encodedUrlNoColon}"}</strong>: {t("轉碼無冒號 URL", "Encoded URL with no colon")}</div>
                         <div><strong className="text-zinc-300">{"{sub}"}</strong>: {t("原始字幕 URL", "Raw Subtitle URL")}</div>
                         <div><strong className="text-indigo-400">{"{encodedSub}"}</strong>: {t("轉碼字幕", "Encoded Subtitle URL")}</div>
                         <div><strong className="text-zinc-300">{"{title}"}</strong>: {t("標題明文", "Raw Title")}</div>
